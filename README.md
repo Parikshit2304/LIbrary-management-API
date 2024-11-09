@@ -8,8 +8,8 @@
 <li><h3>Protected Routes:</h3> Some routes (like creating, updating, and deleting books) require authentication using JWT tokens.</li></ul><br>
 <h2>Technologies Used<h2>
 <ul><li><h3>Node.js:</h3> JavaScript runtime for building the server-side application.</li>
-<li><h3>Express.js: </h3>Web framework for building REST APIs.</li>
+<li><h3>Express.js:</h3>Web framework for building REST APIs.</li>
 <li><h3>MongoDB: </h3>NoSQL database for storing user and book information.</li>
 <li><h3>Mongoose:</h3> ODM for MongoDB to interact with the database.</li>
 <li><h3>JWT (JSON Web Token):</h3> For secure authentication.</li>
-<li><h3>bcryptjs: </h3>For hashing and verifying passwords.</li>
+<li><h3>bcryptjs: </h3>For hashing and verifying passwords.</li></ul>
