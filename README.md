@@ -1,4 +1,4 @@
-<h1>Book Management API</h1><br>
+<h1>Mini Library Management API</h1><br>
 <ul><li>A simple RESTful API for managing books in a library.</li> <li>This application provides routes to register and authenticate users, and perform CRUD operations on books. </li><li>The application is built using Express.js, MongoDB, JWT for authentication, and bcrypt for password hashing.</li></ul>
 
 <h2>Features</h2><br>
