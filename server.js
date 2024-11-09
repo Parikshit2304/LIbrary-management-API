@@ -1,12 +1,12 @@
-require("dotenv").config(); 
-
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const app = express();
-const PORT = process.env.PORT || 8000;  
-const JWT_SECRET = process.env.JWT_SECRET; 
+const PORT = process.env.PORT || 8000;
+const JWT_SECRET = process.env.JWT_SECRET;
 
 // MongoDB Connection
 mongoose
@@ -28,6 +28,27 @@ const bookSchema = new mongoose.Schema({
 
 const Book = mongoose.model("Book", bookSchema);
 
+// User Schema
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+// Pre-save hook for password hashing
+userSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+  next();
+});
+
+// Method to compare password during login
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+const User = mongoose.model("User", userSchema);
+
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -41,24 +62,46 @@ const auth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; 
+    req.user = decoded;
     next();
   } catch (error) {
     res.status(401).json({ msg: "Token is not valid" });
   }
 };
 
-// User Login Route 
-app.post("/login", (req, res) => {
+// Post: Register New User
+app.post("/register", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: "User already registered" });
+    }
+
+    const user = new User({ username, password });
+    await user.save();
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "1h",
+    });
+    res.status(201).json({ message: "User registered" });
+  } catch (error) {
+    res.status(400).json({ error: "Registration failed" });
+  }
+});
+
+// Post: Login Route
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  
-  
-  if (username === "admin" && password === "password") {
-    const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
-    return res.json({ msg: "Login successful", token });
+  const user = await User.findOne({ username });
+
+  if (!user || !(await user.comparePassword(password))) {
+    return res.status(401).json({ error: "Invalid credentials" });
   }
 
-  res.status(401).json({ msg: "Invalid credentials" });
+  const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+  res.json({ token });
 });
 
 // Routes
@@ -138,6 +181,22 @@ app.delete("/books/:id", auth, async (req, res) => {
     res.status(500).json({ msg: "Failed to delete book", error: error.message });
   }
 });
+
+//Book Filter
+app.get('/books', async (req, res) => {
+  try {
+      const { author, genre, status } = req.query;
+      const filter = {};
+      if (author) filter.author = author;
+      if (genre) filter.genre = genre;
+      if (status) filter.status = status;
+      
+      const books = await Book.find(filter);
+      res.json(books);
+  } catch (error) {
+      res.status(500).json({ error: 'Error fetching books' });
+  }
+  });
 
 // Start the server
 app.listen(PORT, () => {
