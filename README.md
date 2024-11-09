@@ -5,7 +5,7 @@
 <ul><li><h3>User Registration & Authentication:</h3> Users can register and log in. JWT tokens are used for authentication.</li>
 <li><h3>Book CRUD Operations:</h3> Create, read, update, and delete books. You can manage book details including title, author, genre, and status (available, borrowed, self-owned).</li>
 <li><h3>Book Filtering:</h3> Users can filter books by author, genre, or status.</li>
-<li><h3>Protected Routes:</h3> Some routes (like creating, updating, and deleting books) require authentication using JWT tokens.</li></ul><br>
+<li><h3>Protected Routes:</h3> Some routes (like creating, updating, and deleting books) require authentication using JWT tokens.</li></ul>
 <h2>Technologies Used<h2>
 <ul><li><h3>Node.js:</h3> JavaScript runtime for building the server-side application.</li>
 <li><h3>Express.js:</h3>Web framework for building REST APIs.</li>
