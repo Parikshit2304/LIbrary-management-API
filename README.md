@@ -1,5 +1,5 @@
-Book Management API
-A simple RESTful API for managing books in a library. This application provides routes to register and authenticate users, and perform CRUD operations on books. The application is built using Express.js, MongoDB, JWT for authentication, and bcrypt for password hashing.
+<h1>Book Management API</h1>
+A simple RESTful API for managing books in a library. <br>This application provides routes to register and authenticate users, and perform CRUD operations on books. <br>The application is built using Express.js, MongoDB, JWT for authentication, and bcrypt for password hashing.
 
 Features
 User Registration & Authentication: Users can register and log in. JWT tokens are used for authentication.
