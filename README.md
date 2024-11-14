@@ -1,16 +1,34 @@
-<h1>Mini Library Management API</h1><br>
-<ul><li>A simple RESTful API for managing books in a library.</li> <li>This application provides routes to register and authenticate users, and perform CRUD operations on books. </li><li>The application is built using Express.js, MongoDB, JWT for authentication, and bcrypt for password hashing.</li></ul>
+# Book Library API
 
-<h2>Features</h2><br>
-<ul><li><h3>User Registration & Authentication:</h3> Users can register and log in. JWT tokens are used for authentication.</li>
-<li><h3>Book CRUD Operations:</h3> Create, read, update, and delete books. You can manage book details including title, author, genre, and status (available, borrowed, self-owned).</li>
-<li><h3>Book Filtering:</h3> Users can filter books by author, genre, or status.</li>
-<li><h3>Protected Routes:</h3> Some routes (like creating, updating, and deleting books) require authentication using JWT tokens.</li></ul>
+This is a simple RESTful API built using Node.js, Express, and MongoDB for managing a library of books. The API supports user registration and login, with JSON Web Token (JWT) authentication for secure access to protected routes. Users can add, update, delete, and view books in the library, with additional features to filter books by author, genre, and status.
 
-<h2>Technologies Used<h2><br>
-<ul><li><h3>Node.js:</h3> JavaScript runtime for building the server-side application.</li>
-<li><h3>Express.js:</h3>Web framework for building REST APIs.</li>
-<li><h3>MongoDB:</h3>NoSQL database for storing user and book information.</li>
-<li><h3>Mongoose:</h3> ODM for MongoDB to interact with the database.</li>
-<li><h3>JWT (JSON Web Token):</h3> For secure authentication.</li>
-<li><h3>bcryptjs: </h3>For hashing and verifying passwords.</li></ul>
+## Features
+
+- User Registration and Login
+- JWT-based Authentication
+- CRUD Operations on Books (Create, Read, Update, Delete)
+- Public and Protected Routes
+- Book Filtering by Author, Genre, and Status
+
+## Tech Stack
+
+- **Node.js**
+- **Express**
+- **MongoDB** with Mongoose
+- **JWT** for authentication
+- **bcrypt** for password hashing
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm installed
+- MongoDB server running or a MongoDB URI
+
+### Setup
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/book-library-api.git
+   cd book-library-api
