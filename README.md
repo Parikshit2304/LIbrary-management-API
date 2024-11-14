@@ -1,4 +1,4 @@
-# Book Library API
+# Library Management API
 
 This is a simple RESTful API built using Node.js, Express, and MongoDB for managing a library of books. The API supports user registration and login, with JSON Web Token (JWT) authentication for secure access to protected routes. Users can add, update, delete, and view books in the library, with additional features to filter books by author, genre, and status.
 
@@ -30,5 +30,5 @@ This is a simple RESTful API built using Node.js, Express, and MongoDB for manag
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/book-library-api.git
-   cd book-library-api
+   git clone https://github.com/yourusername/Library-management-API.git
+   cd Library-management-API
